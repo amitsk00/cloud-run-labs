@@ -43,10 +43,10 @@ const app = express();
 const port = process.env.PORT || 8080;
 app.get('/', (req, res) => {
   const name = process.env.NAME || 'World';
-  res.send(`Hello ${name}!`);
+  res.send('Hello ${name}!');
 });
 app.listen(port, () => {
-  console.log(`helloworld: listening on port ${port}`);
+  console.log('helloworld: listening on port ${port}');
 });
 EOF
 
@@ -76,13 +76,14 @@ gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
 gcloud container images list
 
 # run the container locally
-docker run -d -p 8080:8080 gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
+docker run -d -p 8080 gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
 
 # open web preview or below command to check the details
-curl localhost:8080
+curl localhost:8080 
 
 # create Run service
-gcloud run deploy --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld --allow-unauthenticated --region=$LOCATION
+RUN_SVC=helloworld
+gcloud run deploy $RUN_SVC --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld --allow-unauthenticated --region=$LOCATION
 
 
 

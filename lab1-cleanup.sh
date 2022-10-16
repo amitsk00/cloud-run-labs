@@ -10,5 +10,8 @@ LOCATION="us-central1"
 echo "Project is ${GOOGLE_CLOUD_PROJECT} "
 echo "Location - ${LOCATION} "
 
-gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
-gcloud run services delete helloworld --region=$LOCATION
+echo -e "\tDeleting images"
+gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld --quiet
+echo -e "\tDeleting Run Services"
+gcloud run services delete helloworld --region=$LOCATION --quiet
+
